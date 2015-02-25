@@ -1,7 +1,7 @@
 {
   "name": "grunt-wd-server",
   "description": "grunt webdriver selenium server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/beanstock/grunt-wd-server",
   "author": {
     "name": "Haisheng.Wu",
