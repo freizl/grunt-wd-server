@@ -17,37 +17,59 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-wd-server');
 ```
 
-## The "wd_server" task
+## The "start_wd_server" task
 
 ### Overview
 In your project's Gruntfile, add a section named `wd_server` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  wd_server: {
+  start_wd_server: {
     options: {
       // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    }
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.selenium.version
 Type: `String`
-Default value: `',  '`
+Default value: `2.44`
 
-A string value that is used to do something with whatever.
+Selenium major version
 
-#### options.punctuation
+#### options.selenium.serverOptions
+
+Type: `Object`
+Default value: empty
+
+#### options.selenium.systemProperties
+
+Type: `Object`
+Default value: empty
+
+#### options.chrome.version
+
 Type: `String`
-Default value: `'.'`
+Default value: `'2.14'`
 
-A string value that is used to do something else with whatever else.
+chrome webdrive major version
+
+#### options.ie.version
+
+Type: `String`
+Default value: `'2.44'`
+
+ie webdriver major version
+
+#### options.downloadLocation
+
+Type: `String`
+Default value: `'dl'`
+
+location for download selenium and webdrivers to
 
 ### Usage Examples
 
@@ -56,11 +78,8 @@ In this example, the default options are used to do something with whatever. So 
 
 ```js
 grunt.initConfig({
-  wd_server: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+  start_wd_server: {
+    options: {}
   },
 });
 ```
@@ -72,18 +91,25 @@ In this example, custom options are used to do something else with whatever else
 grunt.initConfig({
   wd_server: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+      selenium: {
+        version: '2.43'
+      },
+      chrome: {
+        version: '2.13'
+      }
+    }
   },
 });
 ```
+## The "stop_wd_server" task
+
+same usage to "start_wd_server"
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+### 0.1.0 - Wed 25 Feb 2015
+  - download selenium.jar and chrome webdriver if not exists
+  - start/stop server
