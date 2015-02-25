@@ -17,6 +17,7 @@ module.exports = function(grunt) {
         format = require('string-format'),
         R = require('ramda'),
         when = require('when'),
+        child_process = require('child_process'),
         spawn = require('child_process').spawn,
         exec = require('child_process').exec,
         request = require('request'),
@@ -49,10 +50,11 @@ module.exports = function(grunt) {
                 chrome: 'http://chromedriver.storage.googleapis.com/{version}/chromedriver_{platform}.zip',
                 ie: 'http://selenium-release.storage.googleapis.com/{version}/IEDriverServer_{platform}_{version}.{minVersion}.zip'
             },
-            downloadLocation: './dl'
+            downloadLocation: os.tmpdir()
         })
 
         grunt.verbose.writeln('platform:' + os.platform()  + ', ' + os.arch())
+        grunt.verbose.writeln('dirname' + __dirname)
 
         var done = this.async(),
             target = this.target,
@@ -251,21 +253,18 @@ module.exports = function(grunt) {
                 writeStream.end()
 
                 // unzip the file it is.
-                if (path.extname(dest) === 'zip') {
+                if (path.extname(dest) === '.zip') {
                     grunt.verbose.writeln('unzip ' + dest + ' -d ' + path.dirname(dest))
-                    var unzip = exec('unzip ' + dest + ' -d ' + path.dirname(dest), function (error, stdout, stderr) {
+                    var unzip = child_process.exec('unzip ' + dest + ' -d ' + path.dirname(dest), [], function (error, stdout, stderr) {
                         if (error) {
                             grunt.verbose.error(error)
                             grunt.verbose.writeln("you may like to unzip manually the file " + dest)
                         }
                         grunt.verbose.writeln(stdout)
-                    })
-
-                    unzip.on('exit', function (code) {
                         df.resolve(dest, null)
                     })
-
                 } else {
+                    grunt.verbose.writeln('.. finish downoald ' + dest)
                     df.resolve(dest, null)
                 }
 

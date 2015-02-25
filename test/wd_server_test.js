@@ -30,7 +30,7 @@ exports.wd_server = {
     },
     default_options: function(test) {
         request(this.seleniumURL, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 test.ok(body.indexOf('WebDriver Hub') > 0)
                 test.ok(true)
             } else {
