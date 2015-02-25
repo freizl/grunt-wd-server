@@ -2,22 +2,22 @@
     "name": "grunt-wd-server",
     "description": "grunt webdriver selenium server",
     "version": "0.1.2",
-    "homepage": "https://github.com/freizl/grunt-wd-server",
+    "homepage": "https:\/\/github.com\/freizl\/grunt-wd-server",
     "author": {
         "name": "Haisheng Wu",
         "email": "freizl@gmail.com"
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/freizl/grunt-wd-server.git"
+        "url": "git:\/\/github.com\/freizl\/grunt-wd-server.git"
     },
     "bugs": {
-        "url": "https://github.com/freizl/grunt-wd-server/issues"
+        "url": "https:\/\/github.com\/freizl\/grunt-wd-server\/issues"
     },
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/freizl/grunt-wd-server/blob/master/LICENSE-MIT"
+            "url": "https:\/\/github.com\/freizl\/grunt-wd-server\/blob\/master\/LICENSE-MIT"
         }
     ],
     "engines": {
@@ -36,8 +36,12 @@
         "grunt": "~0.4.0"
     },
     "keywords": [
-        "selenium, selenium-server, webdriver, chromedriver, iedriver"
-    ]
+        "selenium",
+        "selenium-server",
+        "webdriver",
+        "chromedriver",
+        "iedriver"
+    ],
     "dependencies": {
         "progress": "^1.1.8",
         "ramda": "^0.10.0",
