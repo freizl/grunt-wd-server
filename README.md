@@ -2,6 +2,10 @@
 
 > grunt webdriver selenium server
 
+## Introduction
+
+> Download selenium jar/webdrives and start selenium server.
+
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 
