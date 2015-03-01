@@ -93,7 +93,7 @@ In this example, custom options are used to do something else with whatever else
 
 ```js
 grunt.initConfig({
-  wd_server: {
+  start_wd_server: {
     options: {
       selenium: {
         version: '2.43'
