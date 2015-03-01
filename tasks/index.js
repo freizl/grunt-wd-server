@@ -15,7 +15,6 @@ module.exports = function(grunt) {
         path = require('path'),
         url = require('url'),
         format = require('string-format'),
-        R = require('ramda'),
         when = require('when'),
         child_process = require('child_process'),
         spawn = require('child_process').spawn,
@@ -71,8 +70,8 @@ module.exports = function(grunt) {
                          destination: path.join(options.downloadLocation, path.basename(url))
                        }
             },
-            urls = R.map(applyOptions, [seleniumDL, chromeDL, ieDL]),
-            opts = R.map(genOpt)(R.filter(isNotEmpty, urls)),
+            urls = [seleniumDL, chromeDL, ieDL].map(applyOptions),
+            opts = urls.filter(isNotEmpty).map(genOpt),
             startSelenium = function () {
                 var opt = options.selenium
                 opt.target = target
@@ -90,7 +89,7 @@ module.exports = function(grunt) {
             fs.mkdirSync(options.downloadLocation)
         }
 
-        when.all(R.map(ff, opts))
+        when.all(opts.map(ff))
             .then(startSelenium)
             .catch(errorHandler)
             .then(end)
