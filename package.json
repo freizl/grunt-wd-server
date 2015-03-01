@@ -1,7 +1,7 @@
 {
     "name": "grunt-wd-server",
     "description": "grunt webdriver selenium server",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "homepage": "https:\/\/github.com\/freizl\/grunt-wd-server",
     "author": {
         "name": "Haisheng Wu",
