@@ -16,6 +16,7 @@ module.exports = function(grunt) {
         url = require('url'),
         format = require('string-format'),
         when = require('when'),
+        deepExtend = require('deep-extend'),
         child_process = require('child_process'),
         spawn = require('child_process').spawn,
         exec = require('child_process').exec,
@@ -30,7 +31,7 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('start_wd_server', 'grunt webdriver selenium server', function() {
 
-        var options = this.options({
+        var defaults = {
             selenium: {
                 version: '2.44',
                 minVersion: '0',
@@ -50,10 +51,13 @@ module.exports = function(grunt) {
                 ie: 'http://selenium-release.storage.googleapis.com/{version}/IEDriverServer_{platform}_{version}.{minVersion}.zip'
             },
             downloadLocation: os.tmpdir()
-        })
+        },
+            userOpt = this.options(),
+            options = deepExtend({}, defaults, userOpt)
 
         grunt.verbose.writeln('platform:' + os.platform()  + ', ' + os.arch())
-        grunt.verbose.writeln('dirname' + __dirname)
+        grunt.verbose.writeln('dirname:' + __dirname)
+        grunt.verbose.writeln('options:' + JSON.stringify(options, null, 2))
 
         var done = this.async(),
             target = this.target,
@@ -163,10 +167,15 @@ module.exports = function(grunt) {
             defer = when.defer(),
             complete = false,
             hasSeleniumStarted = function(data) {
+                grunt.verbose.writeln('>>> pulling data... ' + data.toString());
+
                 if (data.toString().match(/Started SocketListener on .+:\d+/) && !complete) {
                     grunt.log.ok('Selenium server SocketListener started.');
                     complete = true;
                     defer.resolve()
+                } else if (data.toString().indexOf('Error') >= 0) {
+                    grunt.log.error('Selenium server SocketListener started.');
+
                 }
             },
             timeoutHandler = function () {

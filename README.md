@@ -1,3 +1,6 @@
+[![NPM](https://nodei.co/npm/grunt-wd-server.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/grunt-wd-server/)
+[![NPM](https://nodei.co/npm-dl/grunt-wd-server.png?height=3)](https://nodei.co/npm/grunt-wd-server/)
+
 # grunt-wd-server
 
 > grunt webdriver selenium server
