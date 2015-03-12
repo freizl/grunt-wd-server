@@ -172,10 +172,11 @@ module.exports = function(grunt) {
                 if (data.toString().match(/Started SocketListener on .+:\d+/) && !complete) {
                     grunt.log.ok('Selenium server SocketListener started.');
                     complete = true;
+                    processes[opt.target].stdout.removeListener('data', hasSeleniumStarted)
+                    processes[opt.target].stderr.removeListener('data', hasSeleniumStarted)
                     defer.resolve()
                 } else if (data.toString().indexOf('Error') >= 0) {
-                    grunt.log.error('Selenium server SocketListener started.');
-
+                    grunt.log.error('Some Error from Selenium server starting ...' + data.toString());
                 }
             },
             timeoutHandler = function () {
